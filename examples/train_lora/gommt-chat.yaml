@@ -1,8 +1,6 @@
 ### model
-# model_name_or_path: meta-llama/Llama-3.2-3B-Instruct
-# adapter_name_or_path: /home/paperspace/Code/LLaMA-Factory/saves/gommt/micro/checkpoint-5/
-model_name_or_path: meta-llama/Llama-3.2-3B
-adapter_name_or_path: /home/paperspace/Code/LLaMA-Factory/saves/gommt/full/checkpoint-260
+model_name_or_path: meta-llama/Llama-3.2-3B-Instruct
+adapter_name_or_path: /home/paperspace/Code/LLaMA-Factory/saves/gommt/full/checkpoint-280
 template: llama3
 infer_backend: vllm
 vllm_enforce_eager: true

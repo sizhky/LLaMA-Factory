@@ -20,14 +20,18 @@ style:
 test:
 	CUDA_VISIBLE_DEVICES= WANDB_DISABLED=true pytest -vv tests/
 
-train-micro:
-	MLFLOW_TRACKING_URI=http://127.0.0.1:3333 MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING=true llamafactory-cli train examples/train_lora/gommt-micro.yaml
+MLFLOW_TRACKING_URI ?= http://184.105.4.49:8071/mlflow
+MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING = true
 
 train-nano:
-	MLFLOW_TRACKING_URI=http://127.0.0.1:3333 MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING=true llamafactory-cli train examples/train_lora/gommt-nano.yaml
+	MLFLOW_TRACKING_URI=$(MLFLOW_TRACKING_URI) MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING=$(MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING) llamafactory-cli train examples/train_lora/gommt-nano.yaml
+
+train-micro:
+	MLFLOW_TRACKING_URI=$(MLFLOW_TRACKING_URI) MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING=$(MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING) llamafactory-cli train examples/train_lora/gommt-micro.yaml
 
 train-full:
-	MLFLOW_TRACKING_URI=http://127.0.0.1:3333 MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING=true llamafactory-cli train examples/train_lora/gommt-full.yaml
+	MLFLOW_TRACKING_URI=$(MLFLOW_TRACKING_URI) MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING=$(MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING) llamafactory-cli train examples/train_lora/gommt-full.yaml
+	
 
 LANGFUSE_PORT ?= 3535
 
@@ -46,3 +50,5 @@ setup-langfuse:
 		-a STDOUT \
 		langfuse/langfuse
 
+chat:
+	llamafactory-cli api /home/paperspace/Code/LLaMA-Factory/examples/train_lora/gommt-chat.yaml
