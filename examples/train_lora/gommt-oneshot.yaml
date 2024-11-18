@@ -1,0 +1,63 @@
+### model
+# ----✂︎----------------------------------------------------------
+model_name_or_path: Qwen/Qwen2.5-3B-Instruct
+template: qwen
+output_dir: saves/gommt/Qwen2.5-3B-oneshot-full
+# resume_from_checkpoint: saves/gommt/oneshot-qwen-2.5
+
+# model_name_or_path: meta-llama/Llama-3.2-3B-Instruct
+# template: llama3 # when using meta-llama model
+# output_dir: saves/gommt/llama-3.2-3B-oneshot-full
+# resume_from_checkpoint: saves/gommt/llama-3.2-3B-oneshot-full
+# ----✂︎----------------------------------------------------------
+
+run_name: llama-3.2-3B-oneshot-full-tmp
+dataset: gommt-oneshot-train
+eval_dataset: gommt-oneshot-val-micro
+max_samples: 100000
+num_train_epochs: 5.0
+cutoff_len: 4096
+# ----✂︎----------------------------------------------------------
+
+# quantization_bit: 4
+# quantization_method: bitsandbytes  # choices: [bitsandbytes (4/8), hqq (2/3/4/5/6/8), eetq (8)]
+
+### method
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_target: all
+# lora_rank: 8
+# lora_alpha: 2x of your rank < 256
+# lora_dropout: 0.05
+# 4000 examples
+
+### dataset
+overwrite_cache: true
+preprocessing_num_workers: 16
+
+### output
+logging_steps: 1
+save_steps: 50
+plot_loss: true
+overwrite_output_dir: true
+report_to: clearml
+
+### train
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 8
+learning_rate: 1.0e-4
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 180000000
+
+### eval
+per_device_eval_batch_size: 4
+eval_strategy: steps
+eval_steps: 5
+
+use_unsloth: true
+enable_liger_kernel: true
+flash_attn: fa2
+rope_scaling: dynamic

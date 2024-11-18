@@ -1,9 +1,21 @@
 ### model
-model_name_or_path: meta-llama/Llama-3.2-3B-Instruct
-adapter_name_or_path: /home/paperspace/Code/LLaMA-Factory/saves/gommt/full/checkpoint-280
-template: llama3
+# adapter_name_or_path: /home/paperspace/Code/LLaMA-Factory/saves/gommt/llama-3.2-3B-oneshot-full
+# model_name_or_path: meta-llama/Llama-3.2-3B-Instruct
+# template: llama3
+
+adapter_name_or_path: /home/paperspace/Code/LLaMA-Factory/saves/gommt/Qwen2.5-3B-oneshot-full
+model_name_or_path: Qwen/Qwen2.5-3B-Instruct
+template: qwen
+# model_name_or_path: Qwen/Qwen2.5-3B-Instruct
+# template: qwen
 infer_backend: vllm
-vllm_enforce_eager: true
-infer_dtype: float16
+# use_dora: true
+# vllm_enforce_eager: true
+# infer_dtype: float16
 cutoff_len: 8192
 vllm_maxlen: 8192
+
+use_unsloth: true
+enable_liger_kernel: true
+flash_attn: fa2
+# rope_scaling: dynamic

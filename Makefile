@@ -32,6 +32,34 @@ train-micro:
 train-full:
 	MLFLOW_TRACKING_URI=$(MLFLOW_TRACKING_URI) MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING=$(MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING) llamafactory-cli train examples/train_lora/gommt-full.yaml
 	
+train-zeroshot:
+	MLFLOW_TRACKING_URI=$(MLFLOW_TRACKING_URI) MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING=$(MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING) llamafactory-cli train examples/train_lora/gommt-zeroshot.yaml
+
+train-oneshot:
+	# MLFLOW_TRACKING_URI=$(MLFLOW_TRACKING_URI) MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING=$(MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING) 
+	CLEARML_PROJECT=gommt/llama3.2-oneshot-full llamafactory-cli train examples/train_lora/gommt-oneshot.yaml
+
+train-twoshot:
+	MLFLOW_TRACKING_URI=$(MLFLOW_TRACKING_URI) MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING=$(MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING) llamafactory-cli train examples/train_lora/gommt-twoshot.yaml
+
+
+train-qwens:
+	# MLFLOW_TRACKING_URI=$(MLFLOW_TRACKING_URI) MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING=$(MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING) llamafactory-cli train examples/train_lora/gommt-oneshot-qwen-0.5B.yaml
+	MLFLOW_TRACKING_URI=$(MLFLOW_TRACKING_URI) MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING=$(MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING) llamafactory-cli train examples/train_lora/gommt-oneshot-qwen-1.5B.yaml
+	# MLFLOW_TRACKING_URI=$(MLFLOW_TRACKING_URI) MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING=$(MLFLOW_ENABLE_SYSTEM_METRICS_LOGGING) llamafactory-cli train examples/train_lora/gommt-oneshot-qwen-7B.yaml
+
+prepare-training-data:
+	@echo "Preparing fewshot training data for: $(app_id)"
+	python scripts/prepare_training_data.py \
+	--app_id=$(app_id) --num_shots=$(num_shots) \
+	--output_path=$(output_path) validation_size=$(validation_size) \
+	--test_size=$(test_size) --seed=$(seed)
+
+predict:
+	...
+
+evaluate:
+	...
 
 LANGFUSE_PORT ?= 3535
 
