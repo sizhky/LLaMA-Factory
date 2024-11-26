@@ -10,7 +10,6 @@ do_train: true
 finetuning_type: lora
 use_dora: true
 lora_target: all
-lora_dropout: 0.05
 
 ### dataset
 dataset: gommt-oneshot-train
@@ -22,13 +21,13 @@ overwrite_cache: true
 preprocessing_num_workers: 16
 
 ### output
-run_name: oneshot-qwen-2.5-7B
-output_dir: saves/gommt/oneshot-qwen-2.5-7B
+run_name: oneshot-qwen2.5-7B
+output_dir: saves/gommt/oneshot-qwen2.5-7B
 logging_steps: 1
 save_steps: 50
 plot_loss: true
 overwrite_output_dir: true
-report_to: mlflow
+report_to: clearml
 
 ### train
 num_train_epochs: 10.0

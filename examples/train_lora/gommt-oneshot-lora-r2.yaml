@@ -1,12 +1,15 @@
 ### model
 # ----✂︎----------------------------------------------------------
-model_name_or_path: Qwen/Qwen2.5-0.5B-Instruct
-template: qwen
-output_dir: saves/gommt/Qwen2.5-0.5B-oneshot
+# model_name_or_path: Qwen/Qwen2.5-3B-Instruct
+# template: qwen
+# output_dir: saves/gommt/Qwen2.5-3B-oneshot-full
+# resume_from_checkpoint: saves/gommt/oneshot-qwen-2.5
 
-# model_name_or_path: meta-llama/Llama-3.2-3B-Instruct
-# template: llama3 # when using meta-llama model
-# output_dir: saves/gommt/llama-3.2-3B-lora
+model_name_or_path: meta-llama/Llama-3.2-3B-Instruct
+template: llama3 # when using meta-llama model
+output_dir: saves/gommt/llama-3.2-3B-lora-r2
+lora_rank: 2
+lora_alpha: 4 # 2x of your rank < 256
 # resume_from_checkpoint: saves/gommt/llama-3.2-3B-oneshot-full
 # ----✂︎----------------------------------------------------------
 
@@ -26,6 +29,9 @@ stage: sft
 do_train: true
 finetuning_type: lora
 lora_target: all
+
+# lora_dropout: 0.05
+# 4000 examples
 
 ### dataset
 overwrite_cache: true

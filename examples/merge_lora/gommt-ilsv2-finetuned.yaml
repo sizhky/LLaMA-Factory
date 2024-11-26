@@ -1,0 +1,13 @@
+### Note: DO NOT use quantized model or quantization_bit when merging lora adapters
+
+### model
+model_name_or_path: /home/paperspace/Data/oneshot-training/ilsv2-model/field_v2_post5_4604
+adapter_name_or_path: /home/paperspace/Code/LLaMA-Factory/saves/gommt/ilsv2.2/
+template: nanonets-ilsv2
+finetuning_type: lora
+
+### export
+export_dir: saves/gommt/ilsv2.2-finetuned
+export_size: 2
+export_device: cpu
+export_legacy_format: false
