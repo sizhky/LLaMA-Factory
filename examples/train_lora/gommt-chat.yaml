@@ -6,11 +6,11 @@
 # template: llama3
 # ----✂︎----------------------------------------------------------
 
-model_name_or_path: /home/paperspace/Data/oneshot-training/ilsv2-model/field_v2_post5_4604
-template: nanonets-ilsv2
-
-# model_name_or_path: /home/paperspace/Code/LLaMA-Factory/saves/gommt/ilsv2.2-finetuned
+# model_name_or_path: /home/paperspace/Data/oneshot-training/ilsv2-model/field_v2_post5_4604
 # template: nanonets-ilsv2
+
+model_name_or_path: /home/paperspace/Code/LLaMA-Factory/saves/gommt/ilsv2.1-r256-v1-finetuned
+template: nanonets-ilsv2
 # ----✂︎----------------------------------------------------------
 
 # adapter_name_or_path: /home/paperspace/Code/LLaMA-Factory/saves/gommt/Qwen2.5-3B-oneshot-full

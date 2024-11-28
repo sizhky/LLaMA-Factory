@@ -1,0 +1,68 @@
+output_dir: saves/gommt/ilsv2.1_v1-r256/
+lora_rank: 256 #384 #64 #384 #512 #384 #256 #384 #224 # 32 384
+lora_alpha: 256 #256 #256 #256 #256 #256 #128 #256
+# ----✂︎----------------------------------------------------------
+
+model_name_or_path: /home/paperspace/Data/oneshot-training/ilsv2-model/field_v2_post5_4604
+stage: sft
+do_train: true
+finetuning_type: lora
+
+# use_dora: true
+# lora_dropout: 0.05 
+# rope_scaling: dynamic
+
+### dataset
+# dataset: alpaca_fields_multilingual,identity,alpaca_fields_mv_ml_zs
+run_name: ilsv2.1
+dataset: gommt-oneshot-train
+# eval_dataset: gommt-oneshot-val-micro
+val_size: 0.01
+max_samples: 100000
+num_train_epochs: 5.0
+# empty_fields_gpt_preds,address_fields_gpt_preds,longbench_2wikimqa_e,weird_dataset_alpaca_fields,alpaca_fields_multilingual,identity,longbench_passage_count,longbench_passage_retrieval_en,answerable_tydiqa_en_thai,databricks-dolly,alpaca_fields_zeroshot # alpaca_fields_mv_ml_zs
+# oneshot_data
+# table_model_326_gpt4_24months
+# table_model_326_gpt4_24months_moderated,identity,alpaca_tables_en
+# table_model_326_gpt4_24months_moderated,identity,longbench_2wikimqa_e,longbench_passage_count,longbench_passage_retrieval_en,alpaca_tables_en
+# table_model_326_gpt4_24months
+
+template: nanonets-ilsv2
+cutoff_len: 15000
+max_new_tokens: 5000 #4096
+overwrite_cache: true
+preprocessing_num_workers: 1
+flash_attn: fa2
+
+### output
+# fields_v2_exp16
+# table_llm_moderated_exp2
+# nemo_base_pretrain
+logging_steps: 1
+save_steps: 50
+plot_loss: true
+overwrite_output_dir: true
+
+### train
+save_total_limit: 1 ## change for test
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 8 #8
+warmup_steps: 150
+learning_rate: 5.0e-5
+num_train_epochs: 5.0 #2.0 ## change for test
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+# fp16: true #fp16
+ddp_timeout: 180000000
+
+### eval
+per_device_eval_batch_size: 4
+eval_strategy: steps
+eval_steps: 5
+
+
+bf16: true
+use_unsloth: true
+enable_liger_kernel: true
+flash_attn: fa2
+rope_scaling: dynamic

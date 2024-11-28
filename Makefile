@@ -115,7 +115,7 @@ train-llamas:
 
 train-dummy-llamas:
 	config="examples/train_lora/gommt-dummies.yaml"; \
-	for rank in 2 4 16 32 64; do \
+	for rank in 2 4 8 16 32 64; do \
 		new_config=$${config%.yaml}-r$$rank-dummy.yaml; \
 		cp $$config $$new_config; \
 		sed -i "s/RANK/$$rank/g" $$new_config; \
@@ -124,6 +124,39 @@ train-dummy-llamas:
 		CLEARML_TASK=$$(basename $$new_config .yaml) \
 		llamafactory-cli train $$new_config; \
 	done
+
+
+CONFIGS = \
+	/home/paperspace/Code/LLaMA-Factory/examples/train_lora/gommt-oneshot-llama-11B-lora-r256.yaml \
+	/home/paperspace/Code/LLaMA-Factory/examples/train_lora/gommt-ilsv2.1-r256.yaml \
+	/home/paperspace/Code/LLaMA-Factory/examples/train_lora/gommt-minicpm.yaml \
+
+train-202411261442:
+	@mkdir -p logs
+	@for config in $(CONFIGS); do \
+		project_name="gommt/oneshot"; \
+		log_file="logs/$$(basename $$config .yaml)_$$(date +'%Y%m%d_%H%M%S').log"; \
+		CLEARML_PROJECT=$$project_name \
+			CLEARML_TASK=$$(basename $$config .yaml) \
+			llamafactory-cli train $$config 2>&1 | tee $$log_file; \
+	done
+
+
+CONFIGS = \
+	/home/paperspace/Code/LLaMA-Factory/examples/train_lora/reliance-llama32.yaml \
+
+train-reliance:
+	@mkdir -p logs
+	@for config in $(CONFIGS); do \
+		project_name="gommt/oneshot"; \
+		log_file="logs/$$(basename $$config .yaml)_$$(date +'%Y%m%d_%H%M%S').log"; \
+		CLEARML_PROJECT=$$project_name \
+			CLEARML_TASK=$$(basename $$config .yaml) \
+			llamafactory-cli train $$config 2>&1 | tee $$log_file; \
+	done
+
+
+
 
 prepare-training-data:
 	@echo "Preparing fewshot training data for: $(app_id)"

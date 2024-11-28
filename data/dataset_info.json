@@ -772,5 +772,33 @@
             "assistant_tag": "assistant",
             "system_tag": "system"
         }
+    },
+    "reliance-oneshot-train": {
+        "file_name": "/home/paperspace/Data/oneshot-training/reliance/training-data/oneshot/train.json",
+        "formatting": "sharegpt",
+        "columns": {
+            "messages": "messages"
+        },
+        "tags": {
+            "role_tag": "role",
+            "content_tag": "content",
+            "user_tag": "user",
+            "assistant_tag": "assistant",
+            "system_tag": "system"
+        }
+    },
+    "reliance-oneshot-test": {
+        "file_name": "/home/paperspace/Data/oneshot-training/reliance/training-data/oneshot/test.json",
+        "formatting": "sharegpt",
+        "columns": {
+            "messages": "messages"
+        },
+        "tags": {
+            "role_tag": "role",
+            "content_tag": "content",
+            "user_tag": "user",
+            "assistant_tag": "assistant",
+            "system_tag": "system"
+        }
     }
 }

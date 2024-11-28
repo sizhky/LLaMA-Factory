@@ -15,7 +15,7 @@ lora_rank: 4
 run_name: llama-3.2-3B-oneshot-full-tmp
 dataset: gommt-oneshot-train
 eval_dataset: gommt-oneshot-val-micro
-max_samples: 10
+max_samples: 1000
 num_train_epochs: 1
 cutoff_len: 4096
 # ----✂︎----------------------------------------------------------
@@ -61,3 +61,4 @@ use_unsloth: true
 enable_liger_kernel: true
 flash_attn: fa2
 rope_scaling: dynamic
+save_total_limit: 1 ## change for test

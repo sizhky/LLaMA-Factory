@@ -5,18 +5,16 @@
 # output_dir: saves/gommt/Qwen2.5-3B-oneshot-full
 # resume_from_checkpoint: saves/gommt/oneshot-qwen-2.5
 
-model_name_or_path: meta-llama/Llama-3.2-3B-Instruct
+model_name_or_path: meta-llama/Llama-3.2-11B-Vision-Instruct
 template: llama3 # when using meta-llama model
-output_dir: saves/gommt/llama-3.2-3B-lora-dummy-RANK
-lora_rank: RANK
+output_dir: saves/gommt/llama-3.2-11B-lora-r256
 # resume_from_checkpoint: saves/gommt/llama-3.2-3B-oneshot-full
 # ----✂︎----------------------------------------------------------
 
-run_name: llama-3.2-3B-oneshot-full-tmp
 dataset: gommt-oneshot-train
 eval_dataset: gommt-oneshot-val-micro
-max_samples: 1000
-num_train_epochs: 1
+max_samples: 100000
+num_train_epochs: 5.0
 cutoff_len: 4096
 # ----✂︎----------------------------------------------------------
 
@@ -28,7 +26,8 @@ stage: sft
 do_train: true
 finetuning_type: lora
 lora_target: all
-# lora_alpha: 2x of your rank < 256
+lora_rank: 256
+lora_alpha: 256 # 2x of your rank < 256
 # lora_dropout: 0.05
 # 4000 examples
 

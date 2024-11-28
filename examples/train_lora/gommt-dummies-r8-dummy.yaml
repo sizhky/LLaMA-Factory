@@ -7,8 +7,8 @@
 
 model_name_or_path: meta-llama/Llama-3.2-3B-Instruct
 template: llama3 # when using meta-llama model
-output_dir: saves/gommt/llama-3.2-3B-lora-dummy-RANK
-lora_rank: RANK
+output_dir: saves/gommt/llama-3.2-3B-lora-dummy-8
+lora_rank: 8
 # resume_from_checkpoint: saves/gommt/llama-3.2-3B-oneshot-full
 # ----✂︎----------------------------------------------------------
 
